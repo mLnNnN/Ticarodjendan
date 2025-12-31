@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Srećan Rođendan Tićo! 🎉</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="stars"></div>
+    <div class="twinkling"></div>
+    
+    <div class="container">
+        <!-- Main Birthday Card -->
+        <div class="birthday-card" id="mainCard">
+            <div class="card-inner">
+                <div class="card-front">
+                    <div class="present-container">
+                        <div class="present">
+                            <div class="present-box">
+                                <div class="present-lid"></div>
+                                <div class="present-body"></div>
+                                <div class="ribbon ribbon-vertical"></div>
+                                <div class="ribbon ribbon-horizontal"></div>
+                                <div class="bow bow-left"></div>
+                                <div class="bow bow-right"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <h1 class="title">Srećan Rođendan</h1>
+                    <h2 class="name">Tićo! 🎁</h2>
+                    <p class="subtitle">otvori poklon</p>
+                </div>
+                <div class="card-back">
+                    <div class="message-container">
+                        <h2>🎉 Srećan Rođendan Tićo! 🎉</h2>
+                        <p class="message">Znam da si već ušla u ozbiljne godine i da si postala bas matora ali samo redovno koriščenje Venogela i bićeš ti super 🎈</p>
+                        <p class="message">Venogel, Trenutačno uklanja osjećaj umornih i natečenih nogu! ✨</p>
+                        <button class="interactive-btn" id="confettiBtn">🎊 Klikni za konfete! 🎊</button>
+                        <button class="interactive-btn" id="messageBtn">💌 Otvori poruke 💌</button>
+                        <button class="interactive-btn" id="musicBtn">🎵 Muzika 🎵</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Messages Section -->
+        <div class="messages-section" id="messagesSection">
+            <button class="close-btn" id="closeMessages">✕</button>
+            <h2>Poruke za seficu 💝</h2>
+            <div class="messages-container">
+                <div class="message-card active" data-index="0">
+                    <div class="message-icon">🎂</div>
+                    <p>21 znam da zvuci bas puno ali nemoj da brines svi cemo nekada biti matori!</p>
+                    <div class="next-hint">Klikni za sledeću poruku →</div>
+                </div>
+                <div class="message-card" data-index="1">
+                    <div class="message-icon">⭐</div>
+                    <p>Kada mi god bude trebao savjet od STARIJE osobe tebi ću se obratiti!</p>
+                    <div class="next-hint">Klikni za sledeću poruku →</div>
+                </div>
+                <div class="message-card" data-index="2">
+                    <div class="message-icon">💖</div>
+                    <p>Dobro dosta sa zezanjem sada nesto i ozbiljno!</p>
+                    <div class="next-hint">Klikni za sledeću poruku →</div>
+                </div>
+                <div class="message-card" data-index="3">
+                    <div class="message-icon">🎈</div>
+                    <p>Želim ti samo da ostanes takva kakva jesi, sve želje ce ti se svakako ostvariti zato sto si rodjena pod srećnom zvijezdom!</p>
+                    <div class="next-hint">Klikni za sledeću poruku →</div>
+                </div>
+                <div class="message-card" data-index="4">
+                    <div class="message-icon">🌈</div>
+                    <p>Želim ti da ove godine budeš ponosna na sebe više nego ikada!</p>
+                    <div class="next-hint">Klikni za sledeću poruku →</div>
+                </div>
+                <div class="message-card" data-index="5">
+                    <div class="message-icon">🎁</div>
+                    <p>Osim želja hocu i da ti se zahvalim sto svima oko sebe uljepšavaš svaki dan koji provedu sa tobom! Cokim ja glavu💝💝💝</p>
+                    <div class="completion-message">✨ Srećan rođendan Tićo! ✨</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Floating Hearts -->
+        <div class="hearts-container"></div>
+
+        <!-- Floating Roses -->
+        <div class="roses-container"></div>
+
+        <!-- Interactive Elements -->
+        <div class="floating-elements">
+            <div class="balloon balloon1">🎈</div>
+            <div class="balloon balloon2">🎈</div>
+            <div class="balloon balloon3">🎈</div>
+            <div class="balloon balloon4">🎈</div>
+            <div class="rose rose1">🌹</div>
+            <div class="rose rose2">🌹</div>
+            <div class="rose rose3">🌹</div>
+        </div>
+    </div>
+
+    <canvas id="confetti-canvas"></canvas>
+    
+    <!-- Audio element for background music -->
+    <audio id="birthdayMusic" preload="auto">
+        <source src="Makedonsko Devojce - Macedonian Song.mp3" type="audio/mpeg">
+    </audio>
+    
+    <script src="script.js"></script>
+</body>
+</html>
+

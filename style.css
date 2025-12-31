@@ -1,0 +1,841 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    -webkit-tap-highlight-color: transparent;
+}
+
+*:not(input):not(textarea) {
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    overflow-x: hidden;
+    min-height: 100vh;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 25%, #f093fb 50%, #4facfe 75%, #00f2fe 100%);
+    background-size: 400% 400%;
+    animation: gradientShift 15s ease infinite;
+    position: relative;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+@keyframes gradientShift {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+/* Stars Background */
+.stars, .twinkling {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    width: 100%;
+    height: 100%;
+    display: block;
+    z-index: 0;
+}
+
+.stars {
+    background: #000 url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100"><circle cx="50" cy="50" r="1" fill="white" opacity="0.8"/></svg>') repeat;
+    z-index: 0;
+}
+
+.twinkling {
+    background: transparent url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="200" height="200"><circle cx="100" cy="100" r="1.5" fill="white" opacity="0.6"/></svg>') repeat;
+    z-index: 1;
+    animation: move-twink-back 200s linear infinite;
+}
+
+@keyframes move-twink-back {
+    from { transform: translateX(0); }
+    to { transform: translateX(-10000px); }
+}
+
+.container {
+    position: relative;
+    z-index: 10;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    padding: 20px;
+}
+
+/* Birthday Card */
+.birthday-card {
+    perspective: 1000px;
+    width: 100%;
+    max-width: 500px;
+    height: 600px;
+    cursor: pointer;
+    touch-action: manipulation;
+}
+
+.card-inner {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    transition: transform 0.8s;
+    transform-style: preserve-3d;
+}
+
+.birthday-card.flipped .card-inner {
+    transform: rotateY(180deg);
+}
+
+.card-front, .card-back {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    backface-visibility: hidden;
+    border-radius: 20px;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 40px;
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(10px);
+}
+
+.card-back {
+    transform: rotateY(180deg);
+    background: linear-gradient(135deg, #ff6b6b 0%, #ffa500 50%, #ff6b9d 100%);
+    color: white;
+}
+
+/* Present Animation */
+.present-container {
+    margin-bottom: 30px;
+    animation: bounce 2s infinite;
+}
+
+@keyframes bounce {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-20px); }
+}
+
+.present {
+    position: relative;
+    width: 200px;
+    height: 200px;
+    cursor: pointer;
+    transition: transform 0.3s;
+    touch-action: manipulation;
+    -webkit-tap-highlight-color: transparent;
+}
+
+.present:hover {
+    transform: scale(1.1);
+}
+
+.present-box {
+    position: relative;
+    width: 100%;
+    height: 100%;
+}
+
+.present-body {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 70%;
+    background: linear-gradient(135deg, #ff6b6b 0%, #ffa500 100%);
+    border-radius: 10px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+    z-index: 1;
+}
+
+.present-lid {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 30%;
+    background: linear-gradient(135deg, #ff8c8c 0%, #ffb84d 100%);
+    border-radius: 10px 10px 0 0;
+    box-shadow: 0 -5px 20px rgba(0, 0, 0, 0.2);
+    z-index: 2;
+    transition: transform 0.5s ease;
+}
+
+.present:hover .present-lid {
+    transform: translateY(-30px) rotate(-5deg);
+}
+
+.ribbon {
+    position: absolute;
+    background: #ff1493;
+    z-index: 3;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+}
+
+.ribbon-vertical {
+    left: 50%;
+    top: 0;
+    transform: translateX(-50%);
+    width: 20px;
+    height: 100%;
+    background: linear-gradient(to bottom, #ff1493, #ff69b4);
+}
+
+.ribbon-horizontal {
+    top: 50%;
+    left: 0;
+    transform: translateY(-50%);
+    width: 100%;
+    height: 20px;
+    background: linear-gradient(to right, #ff1493, #ff69b4);
+}
+
+.bow {
+    position: absolute;
+    width: 40px;
+    height: 40px;
+    background: #ff1493;
+    border-radius: 50%;
+    z-index: 4;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+}
+
+.bow-left {
+    top: 50%;
+    left: -20px;
+    transform: translateY(-50%);
+    background: radial-gradient(circle, #ff69b4, #ff1493);
+}
+
+.bow-right {
+    top: 50%;
+    right: -20px;
+    transform: translateY(-50%);
+    background: radial-gradient(circle, #ff69b4, #ff1493);
+}
+
+.title {
+    font-size: 3em;
+    font-weight: bold;
+    background: linear-gradient(45deg, #ff6b6b, #ffa500, #ff6b9d, #4ecdc4);
+    background-size: 300% 300%;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    animation: gradientText 3s ease infinite;
+    margin-bottom: 10px;
+}
+
+@keyframes gradientText {
+    0%, 100% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+}
+
+.name {
+    font-size: 2.5em;
+    color: #ff6b9d;
+    margin-bottom: 20px;
+    animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.05); }
+}
+
+.subtitle {
+    font-size: 1.2em;
+    color: #666;
+    text-align: center;
+    animation: fadeInOut 2s infinite;
+}
+
+@keyframes fadeInOut {
+    0%, 100% { opacity: 0.7; }
+    50% { opacity: 1; }
+}
+
+/* Message Container */
+.message-container {
+    text-align: center;
+    width: 100%;
+}
+
+.message-container h2 {
+    font-size: 2.5em;
+    margin-bottom: 20px;
+    animation: bounce 2s infinite;
+}
+
+.message {
+    font-size: 1.3em;
+    margin: 15px 0;
+    line-height: 1.6;
+    animation: slideIn 1s ease;
+}
+
+@keyframes slideIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Interactive Buttons */
+.interactive-btn {
+    background: rgba(255, 255, 255, 0.3);
+    border: 2px solid white;
+    color: white;
+    padding: 15px 30px;
+    font-size: 1.2em;
+    border-radius: 50px;
+    cursor: pointer;
+    margin: 10px;
+    transition: all 0.3s;
+    backdrop-filter: blur(10px);
+    font-weight: bold;
+    touch-action: manipulation;
+    -webkit-tap-highlight-color: transparent;
+}
+
+.interactive-btn:hover {
+    background: rgba(255, 255, 255, 0.5);
+    transform: scale(1.1);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+}
+
+.interactive-btn:active {
+    transform: scale(0.95);
+}
+
+/* Messages Section */
+.messages-section {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.9);
+    z-index: 1000;
+    display: none;
+    padding: 20px;
+    overflow-y: auto;
+    overflow-x: hidden;
+}
+
+.messages-section.active {
+    display: block;
+    animation: fadeIn 0.5s;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+.messages-section h2 {
+    color: white;
+    text-align: center;
+    font-size: 3em;
+    margin-bottom: 40px;
+}
+
+.close-btn {
+    position: absolute;
+    top: 20px;
+    right: 30px;
+    background: rgba(255, 255, 255, 0.2);
+    border: 2px solid white;
+    color: white;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    font-size: 1.5em;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+.close-btn:hover {
+    background: rgba(255, 255, 255, 0.4);
+    transform: rotate(90deg);
+}
+
+.messages-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: calc(100vh - 150px);
+    position: relative;
+    width: 100%;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+.message-card {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    padding: 40px;
+    border-radius: 25px;
+    text-align: center;
+    color: white;
+    cursor: pointer;
+    transition: all 0.5s ease;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+    position: absolute;
+    width: calc(100vw - 40px);
+    max-width: 90vh;
+    height: calc(100vw - 40px);
+    max-height: 90vh;
+    aspect-ratio: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    opacity: 0;
+    transform: scale(0.8) translateY(20px);
+    pointer-events: none;
+    touch-action: manipulation;
+    -webkit-tap-highlight-color: transparent;
+}
+
+.message-card.active {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+    pointer-events: auto;
+    position: relative;
+}
+
+.message-card.fade-out {
+    opacity: 0;
+    transform: scale(0.8) translateY(-20px);
+}
+
+.message-card.fade-in {
+    animation: messageFadeIn 0.5s ease;
+}
+
+@keyframes messageFadeIn {
+    from {
+        opacity: 0;
+        transform: scale(0.8) translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1) translateY(0);
+    }
+}
+
+.message-card:hover {
+    transform: scale(1.05);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+}
+
+.message-card.active:hover {
+    transform: scale(1.05) translateY(-5px);
+}
+
+.message-icon {
+    font-size: 5em;
+    margin-bottom: 30px;
+    animation: spin 3s linear infinite;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+.message-card p {
+    font-size: 1.4em;
+    line-height: 1.6;
+    margin: 20px 0;
+    flex-grow: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0 20px;
+}
+
+.next-hint {
+    margin-top: 20px;
+    font-size: 1em;
+    opacity: 0.8;
+    font-style: italic;
+    animation: pulse 2s infinite;
+}
+
+.completion-message {
+    margin-top: 30px;
+    font-size: 2.5em;
+    font-weight: bold;
+    animation: bounce 2s infinite;
+    text-align: center;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Special styling for last message card */
+.message-card[data-index="5"] {
+    justify-content: center;
+    align-items: center;
+}
+
+.message-card[data-index="5"] p {
+    font-size: 1.2em;
+    margin-bottom: 30px;
+}
+
+.message-card[data-index="5"] .completion-message {
+    font-size: 2em;
+    margin-top: 20px;
+    line-height: 1.2;
+    text-align: center;
+    width: 100%;
+    display: block;
+    padding: 0 20px;
+}
+
+@media (max-width: 768px) {
+    .message-card[data-index="5"] .completion-message {
+        font-size: 1.6em;
+    }
+}
+
+@media (max-width: 480px) {
+    .message-card[data-index="5"] .completion-message {
+        font-size: 1.4em;
+        padding: 0 15px;
+    }
+}
+
+/* Floating Hearts */
+.hearts-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 5;
+}
+
+.heart {
+    position: absolute;
+    font-size: 20px;
+    color: #ff6b9d;
+    animation: floatUp 4s linear forwards;
+    pointer-events: none;
+}
+
+/* Floating Roses */
+.roses-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 5;
+}
+
+.rose {
+    position: absolute;
+    font-size: 25px;
+    animation: floatUpRose 5s linear forwards;
+    pointer-events: none;
+}
+
+@keyframes floatUp {
+    0% {
+        transform: translateY(100vh) rotate(0deg);
+        opacity: 1;
+    }
+    100% {
+        transform: translateY(-100px) rotate(360deg);
+        opacity: 0;
+    }
+}
+
+@keyframes floatUpRose {
+    0% {
+        transform: translateY(100vh) rotate(0deg) scale(0.8);
+        opacity: 1;
+    }
+    50% {
+        transform: translateY(50vh) rotate(180deg) scale(1);
+        opacity: 0.9;
+    }
+    100% {
+        transform: translateY(-100px) rotate(360deg) scale(0.8);
+        opacity: 0;
+    }
+}
+
+/* Balloons */
+.floating-elements {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 5;
+}
+
+.balloon {
+    position: absolute;
+    font-size: 40px;
+    animation: float 6s ease-in-out infinite;
+}
+
+.balloon1 {
+    left: 10%;
+    animation-delay: 0s;
+}
+
+.balloon2 {
+    left: 30%;
+    animation-delay: 1s;
+}
+
+.balloon3 {
+    left: 60%;
+    animation-delay: 2s;
+}
+
+.balloon4 {
+    left: 80%;
+    animation-delay: 3s;
+}
+
+.floating-elements .rose {
+    position: absolute;
+    font-size: 35px;
+    animation: floatRose 7s ease-in-out infinite;
+}
+
+.floating-elements .rose1 {
+    left: 20%;
+    animation-delay: 0.5s;
+}
+
+.floating-elements .rose2 {
+    left: 50%;
+    animation-delay: 2.5s;
+}
+
+.floating-elements .rose3 {
+    left: 75%;
+    animation-delay: 4.5s;
+}
+
+@keyframes float {
+    0%, 100% {
+        transform: translateY(100vh) translateX(0);
+    }
+    50% {
+        transform: translateY(0) translateX(20px);
+    }
+}
+
+@keyframes floatRose {
+    0%, 100% {
+        transform: translateY(100vh) translateX(0) rotate(0deg);
+    }
+    25% {
+        transform: translateY(75vh) translateX(15px) rotate(90deg);
+    }
+    50% {
+        transform: translateY(50vh) translateX(-10px) rotate(180deg);
+    }
+    75% {
+        transform: translateY(25vh) translateX(10px) rotate(270deg);
+    }
+}
+
+/* Confetti Canvas */
+#confetti-canvas {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 9999;
+}
+
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .container {
+        padding: 10px;
+    }
+    
+    .title {
+        font-size: 2em;
+    }
+    
+    .name {
+        font-size: 1.8em;
+    }
+    
+    .birthday-card {
+        height: 500px;
+        max-width: 95%;
+    }
+    
+    .card-front, .card-back {
+        padding: 20px;
+    }
+    
+    .present {
+        width: 150px;
+        height: 150px;
+    }
+    
+    .messages-section {
+        padding: 20px 10px;
+    }
+    
+    .messages-section h2 {
+        font-size: 2em;
+        margin-bottom: 30px;
+    }
+    
+    .messages-container {
+        min-height: calc(100vh - 120px);
+        width: 100%;
+        padding: 10px;
+    }
+    
+    .message-card {
+        padding: 30px;
+        width: calc(100vw - 20px);
+        height: calc(100vw - 20px);
+        max-width: calc(100vh - 120px);
+        max-height: calc(100vh - 120px);
+        aspect-ratio: 1;
+    }
+    
+    .message-icon {
+        font-size: 4em;
+        margin-bottom: 25px;
+    }
+    
+    .message-card p {
+        font-size: 1.2em;
+        margin: 15px 0;
+        padding: 0 15px;
+    }
+    
+    .next-hint {
+        font-size: 0.9em;
+        margin-top: 15px;
+    }
+    
+    .completion-message {
+        font-size: 1.4em;
+        margin-top: 20px;
+    }
+    
+    .message-container h2 {
+        font-size: 1.8em;
+    }
+    
+    .message {
+        font-size: 1.1em;
+    }
+    
+    .interactive-btn {
+        padding: 12px 20px;
+        font-size: 1em;
+        margin: 8px;
+        width: 90%;
+        max-width: 250px;
+    }
+    
+    .close-btn {
+        top: 10px;
+        right: 15px;
+        width: 40px;
+        height: 40px;
+        font-size: 1.2em;
+    }
+    
+    .subtitle {
+        font-size: 1em;
+    }
+}
+
+@media (max-width: 480px) {
+    .title {
+        font-size: 1.6em;
+    }
+    
+    .name {
+        font-size: 1.5em;
+    }
+    
+    .birthday-card {
+        height: 450px;
+    }
+    
+    .present {
+        width: 120px;
+        height: 120px;
+    }
+    
+    .messages-section h2 {
+        font-size: 1.6em;
+    }
+    
+    .messages-container {
+        min-height: calc(100vh - 100px);
+        padding: 5px;
+    }
+    
+    .message-card {
+        width: calc(100vw - 10px);
+        height: calc(100vw - 10px);
+        max-width: calc(100vh - 100px);
+        max-height: calc(100vh - 100px);
+        padding: 25px;
+    }
+    
+    .message-icon {
+        font-size: 3.5em;
+        margin-bottom: 20px;
+    }
+    
+    .message-card p {
+        font-size: 1.1em;
+        padding: 0 10px;
+    }
+    
+    .next-hint {
+        font-size: 0.85em;
+    }
+    
+    .completion-message {
+        font-size: 1.2em;
+    }
+    
+    .interactive-btn {
+        font-size: 0.9em;
+        padding: 10px 18px;
+    }
+}
+
