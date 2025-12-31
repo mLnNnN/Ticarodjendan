@@ -16,12 +16,16 @@ body {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     overflow-x: hidden;
     min-height: 100vh;
+    min-height: 100dvh;
+    min-height: -webkit-fill-available;
     background: linear-gradient(135deg, #667eea 0%, #764ba2 25%, #f093fb 50%, #4facfe 75%, #00f2fe 100%);
     background-size: 400% 400%;
     animation: gradientShift 15s ease infinite;
     position: relative;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+    padding: env(safe-area-inset-top) env(safe-area-inset-right) env(safe-area-inset-bottom) env(safe-area-inset-left);
+    touch-action: pan-y;
 }
 
 @keyframes gradientShift {
@@ -66,15 +70,18 @@ body {
     justify-content: center;
     align-items: center;
     min-height: 100vh;
-    padding: 20px;
+    min-height: 100dvh;
+    min-height: -webkit-fill-available;
+    padding: 10px;
 }
 
 /* Birthday Card */
 .birthday-card {
     perspective: 1000px;
     width: 100%;
-    max-width: 500px;
-    height: 600px;
+    max-width: 100%;
+    height: 85vh;
+    max-height: 700px;
     cursor: pointer;
     touch-action: manipulation;
 }
@@ -102,7 +109,7 @@ body {
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    padding: 40px;
+    padding: 20px 15px;
     background: rgba(255, 255, 255, 0.95);
     backdrop-filter: blur(10px);
 }
@@ -115,7 +122,7 @@ body {
 
 /* Present Animation */
 .present-container {
-    margin-bottom: 30px;
+    margin-bottom: 20px;
     animation: bounce 2s infinite;
 }
 
@@ -126,8 +133,8 @@ body {
 
 .present {
     position: relative;
-    width: 200px;
-    height: 200px;
+    width: 140px;
+    height: 140px;
     cursor: pointer;
     transition: transform 0.3s;
     touch-action: manipulation;
@@ -223,7 +230,7 @@ body {
 }
 
 .title {
-    font-size: 3em;
+    font-size: 1.8em;
     font-weight: bold;
     background: linear-gradient(45deg, #ff6b6b, #ffa500, #ff6b9d, #4ecdc4);
     background-size: 300% 300%;
@@ -240,9 +247,9 @@ body {
 }
 
 .name {
-    font-size: 2.5em;
+    font-size: 1.5em;
     color: #ff6b9d;
-    margin-bottom: 20px;
+    margin-bottom: 15px;
     animation: pulse 2s infinite;
 }
 
@@ -252,7 +259,7 @@ body {
 }
 
 .subtitle {
-    font-size: 1.2em;
+    font-size: 0.95em;
     color: #666;
     text-align: center;
     animation: fadeInOut 2s infinite;
@@ -270,15 +277,15 @@ body {
 }
 
 .message-container h2 {
-    font-size: 2.5em;
-    margin-bottom: 20px;
+    font-size: 1.5em;
+    margin-bottom: 15px;
     animation: bounce 2s infinite;
 }
 
 .message {
-    font-size: 1.3em;
-    margin: 15px 0;
-    line-height: 1.6;
+    font-size: 1em;
+    margin: 10px 0;
+    line-height: 1.4;
     animation: slideIn 1s ease;
 }
 
@@ -298,16 +305,20 @@ body {
     background: rgba(255, 255, 255, 0.3);
     border: 2px solid white;
     color: white;
-    padding: 15px 30px;
-    font-size: 1.2em;
+    padding: 14px 20px;
+    font-size: 0.95em;
     border-radius: 50px;
     cursor: pointer;
-    margin: 10px;
+    margin: 8px 5px;
     transition: all 0.3s;
     backdrop-filter: blur(10px);
     font-weight: bold;
     touch-action: manipulation;
     -webkit-tap-highlight-color: transparent;
+    width: calc(100% - 10px);
+    max-width: 100%;
+    min-height: 48px;
+    display: block;
 }
 
 .interactive-btn:hover {
@@ -330,9 +341,11 @@ body {
     background: rgba(0, 0, 0, 0.9);
     z-index: 1000;
     display: none;
-    padding: 20px;
+    padding: 15px 10px;
+    padding-top: 60px;
     overflow-y: auto;
     overflow-x: hidden;
+    -webkit-overflow-scrolling: touch;
 }
 
 .messages-section.active {
@@ -348,44 +361,54 @@ body {
 .messages-section h2 {
     color: white;
     text-align: center;
-    font-size: 3em;
-    margin-bottom: 40px;
+    font-size: 1.5em;
+    margin-bottom: 20px;
+    padding: 0 10px;
 }
 
 .close-btn {
-    position: absolute;
-    top: 20px;
-    right: 30px;
+    position: fixed;
+    top: 15px;
+    right: 15px;
     background: rgba(255, 255, 255, 0.2);
     border: 2px solid white;
     color: white;
-    width: 50px;
-    height: 50px;
+    width: 44px;
+    height: 44px;
     border-radius: 50%;
-    font-size: 1.5em;
+    font-size: 1.3em;
     cursor: pointer;
     transition: all 0.3s;
+    z-index: 1001;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    touch-action: manipulation;
+    -webkit-tap-highlight-color: transparent;
 }
 
-.close-btn:hover {
+.close-btn:hover,
+.close-btn:active {
     background: rgba(255, 255, 255, 0.4);
-    transform: rotate(90deg);
+    transform: rotate(90deg) scale(0.95);
 }
 
 .messages-container {
     display: flex;
     justify-content: center;
     align-items: center;
-    min-height: calc(100vh - 150px);
+    min-height: calc(100vh - 100px);
+    min-height: calc(100dvh - 100px);
     position: relative;
     width: 100%;
     margin: 0 auto;
-    padding: 20px;
+    padding: 10px 5px;
+    overflow: visible;
 }
 
 .message-card {
     background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-    padding: 40px;
+    padding: 25px 20px;
     border-radius: 25px;
     text-align: center;
     color: white;
@@ -393,32 +416,38 @@ body {
     transition: all 0.5s ease;
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
     position: absolute;
-    width: calc(100vw - 40px);
-    max-width: 90vh;
-    height: calc(100vw - 40px);
-    max-height: 90vh;
-    aspect-ratio: 1;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) scale(0.8);
+    width: calc(100vw - 20px);
+    max-width: 370px;
+    min-height: 350px;
+    max-height: calc(100vh - 120px);
+    max-height: calc(100dvh - 120px);
+    height: auto;
+    aspect-ratio: auto;
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    justify-content: space-between;
     align-items: center;
     opacity: 0;
-    transform: scale(0.8) translateY(20px);
     pointer-events: none;
     touch-action: manipulation;
     -webkit-tap-highlight-color: transparent;
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
 }
 
 .message-card.active {
     opacity: 1;
-    transform: scale(1) translateY(0);
+    transform: translate(-50%, -50%) scale(1);
     pointer-events: auto;
-    position: relative;
+    z-index: 10;
 }
 
 .message-card.fade-out {
     opacity: 0;
-    transform: scale(0.8) translateY(-20px);
+    transform: translate(-50%, -50%) scale(0.8);
 }
 
 .message-card.fade-in {
@@ -428,26 +457,22 @@ body {
 @keyframes messageFadeIn {
     from {
         opacity: 0;
-        transform: scale(0.8) translateY(20px);
+        transform: translate(-50%, -50%) scale(0.8);
     }
     to {
         opacity: 1;
-        transform: scale(1) translateY(0);
+        transform: translate(-50%, -50%) scale(1);
     }
 }
 
-.message-card:hover {
-    transform: scale(1.05);
+.message-card.active:hover {
+    transform: translate(-50%, -50%) scale(1.02);
     box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
 }
 
-.message-card.active:hover {
-    transform: scale(1.05) translateY(-5px);
-}
-
 .message-icon {
-    font-size: 5em;
-    margin-bottom: 30px;
+    font-size: 3em;
+    margin-bottom: 15px;
     animation: spin 3s linear infinite;
 }
 
@@ -457,27 +482,28 @@ body {
 }
 
 .message-card p {
-    font-size: 1.4em;
-    line-height: 1.6;
-    margin: 20px 0;
+    font-size: 1.1em;
+    line-height: 1.5;
+    margin: 10px 0;
     flex-grow: 1;
     display: flex;
     align-items: center;
     justify-content: center;
-    padding: 0 20px;
+    padding: 0 10px;
 }
 
 .next-hint {
-    margin-top: 20px;
-    font-size: 1em;
+    margin-top: 15px;
+    font-size: 0.85em;
     opacity: 0.8;
     font-style: italic;
     animation: pulse 2s infinite;
+    padding: 0 10px;
 }
 
 .completion-message {
-    margin-top: 30px;
-    font-size: 2.5em;
+    margin-top: 15px;
+    font-size: 1.3em;
     font-weight: bold;
     animation: bounce 2s infinite;
     text-align: center;
@@ -485,6 +511,8 @@ body {
     display: flex;
     align-items: center;
     justify-content: center;
+    padding: 0 10px;
+    line-height: 1.3;
 }
 
 /* Special styling for last message card */
@@ -494,31 +522,18 @@ body {
 }
 
 .message-card[data-index="5"] p {
-    font-size: 1.2em;
-    margin-bottom: 30px;
+    font-size: 1.1em;
+    margin-bottom: 15px;
 }
 
 .message-card[data-index="5"] .completion-message {
-    font-size: 2em;
-    margin-top: 20px;
-    line-height: 1.2;
+    font-size: 1.3em;
+    margin-top: 15px;
+    line-height: 1.3;
     text-align: center;
     width: 100%;
     display: block;
-    padding: 0 20px;
-}
-
-@media (max-width: 768px) {
-    .message-card[data-index="5"] .completion-message {
-        font-size: 1.6em;
-    }
-}
-
-@media (max-width: 480px) {
-    .message-card[data-index="5"] .completion-message {
-        font-size: 1.4em;
-        padding: 0 15px;
-    }
+    padding: 0 10px;
 }
 
 /* Floating Hearts */
@@ -678,164 +693,176 @@ body {
 }
 
 
-/* Responsive Design */
-@media (max-width: 768px) {
+/* Mobile First - Optimized for iPhone 15 Pro (393px × 852px) */
+.container {
+    padding: 10px;
+}
+
+.title {
+    font-size: 1.8em;
+}
+
+.name {
+    font-size: 1.5em;
+}
+
+.birthday-card {
+    height: 85vh;
+    max-height: 700px;
+    max-width: 100%;
+    width: 100%;
+}
+
+.card-front, .card-back {
+    padding: 20px 15px;
+}
+
+.present {
+    width: 140px;
+    height: 140px;
+}
+
+.messages-section {
+    padding: 15px 10px;
+    padding-top: 60px;
+}
+
+.messages-section h2 {
+    font-size: 1.5em;
+    margin-bottom: 20px;
+    padding: 0 10px;
+}
+
+.messages-container {
+    min-height: calc(100vh - 100px);
+    width: 100%;
+    padding: 10px 5px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.message-card {
+    padding: 25px 20px;
+    width: calc(100vw - 20px);
+    max-width: 370px;
+    min-height: 400px;
+    max-height: 600px;
+    height: auto;
+    aspect-ratio: auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.message-icon {
+    font-size: 3em;
+    margin-bottom: 15px;
+}
+
+.message-card p {
+    font-size: 1.1em;
+    line-height: 1.5;
+    margin: 10px 0;
+    padding: 0 10px;
+    flex-grow: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.next-hint {
+    font-size: 0.85em;
+    margin-top: 15px;
+    padding: 0 10px;
+}
+
+.completion-message {
+    font-size: 1.3em;
+    margin-top: 15px;
+    padding: 0 10px;
+    line-height: 1.3;
+}
+
+.message-container h2 {
+    font-size: 1.5em;
+    margin-bottom: 15px;
+}
+
+.message {
+    font-size: 1em;
+    line-height: 1.4;
+    margin: 10px 0;
+}
+
+.interactive-btn {
+    padding: 14px 20px;
+    font-size: 0.95em;
+    margin: 8px 5px;
+    width: calc(100% - 10px);
+    max-width: 100%;
+    min-height: 48px;
+}
+
+.close-btn {
+    top: 15px;
+    right: 15px;
+    width: 44px;
+    height: 44px;
+    font-size: 1.3em;
+    z-index: 1001;
+}
+
+.subtitle {
+    font-size: 0.95em;
+}
+
+.present-container {
+    margin-bottom: 20px;
+}
+
+/* Desktop styles - minimal */
+@media (min-width: 769px) {
     .container {
-        padding: 10px;
-    }
-    
-    .title {
-        font-size: 2em;
-    }
-    
-    .name {
-        font-size: 1.8em;
-    }
-    
-    .birthday-card {
-        height: 500px;
-        max-width: 95%;
-    }
-    
-    .card-front, .card-back {
         padding: 20px;
     }
     
-    .present {
-        width: 150px;
-        height: 150px;
+    .birthday-card {
+        max-width: 500px;
+        height: 600px;
     }
     
-    .messages-section {
-        padding: 20px 10px;
-    }
-    
-    .messages-section h2 {
-        font-size: 2em;
-        margin-bottom: 30px;
-    }
-    
-    .messages-container {
-        min-height: calc(100vh - 120px);
-        width: 100%;
-        padding: 10px;
-    }
-    
-    .message-card {
-        padding: 30px;
-        width: calc(100vw - 20px);
-        height: calc(100vw - 20px);
-        max-width: calc(100vh - 120px);
-        max-height: calc(100vh - 120px);
-        aspect-ratio: 1;
-    }
-    
-    .message-icon {
-        font-size: 4em;
-        margin-bottom: 25px;
-    }
-    
-    .message-card p {
-        font-size: 1.2em;
-        margin: 15px 0;
-        padding: 0 15px;
-    }
-    
-    .next-hint {
-        font-size: 0.9em;
-        margin-top: 15px;
-    }
-    
-    .completion-message {
-        font-size: 1.4em;
-        margin-top: 20px;
-    }
-    
-    .message-container h2 {
-        font-size: 1.8em;
-    }
-    
-    .message {
-        font-size: 1.1em;
-    }
-    
-    .interactive-btn {
-        padding: 12px 20px;
-        font-size: 1em;
-        margin: 8px;
-        width: 90%;
-        max-width: 250px;
-    }
-    
-    .close-btn {
-        top: 10px;
-        right: 15px;
-        width: 40px;
-        height: 40px;
-        font-size: 1.2em;
-    }
-    
-    .subtitle {
-        font-size: 1em;
-    }
-}
-
-@media (max-width: 480px) {
     .title {
-        font-size: 1.6em;
+        font-size: 3em;
     }
     
     .name {
-        font-size: 1.5em;
-    }
-    
-    .birthday-card {
-        height: 450px;
+        font-size: 2.5em;
     }
     
     .present {
-        width: 120px;
-        height: 120px;
-    }
-    
-    .messages-section h2 {
-        font-size: 1.6em;
-    }
-    
-    .messages-container {
-        min-height: calc(100vh - 100px);
-        padding: 5px;
+        width: 200px;
+        height: 200px;
     }
     
     .message-card {
-        width: calc(100vw - 10px);
-        height: calc(100vw - 10px);
-        max-width: calc(100vh - 100px);
-        max-height: calc(100vh - 100px);
-        padding: 25px;
+        width: 500px;
+        max-width: 500px;
+        height: 500px;
+        padding: 40px;
     }
     
     .message-icon {
-        font-size: 3.5em;
-        margin-bottom: 20px;
+        font-size: 5em;
     }
     
     .message-card p {
-        font-size: 1.1em;
-        padding: 0 10px;
-    }
-    
-    .next-hint {
-        font-size: 0.85em;
-    }
-    
-    .completion-message {
-        font-size: 1.2em;
+        font-size: 1.4em;
     }
     
     .interactive-btn {
-        font-size: 0.9em;
-        padding: 10px 18px;
+        width: auto;
+        max-width: 250px;
     }
 }
 
